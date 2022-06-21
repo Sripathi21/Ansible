@@ -1,0 +1,39 @@
+ansible_ installation
+
+-> Launch Amazon Linux (no need to install ansible s/w in hosts)
+-> yum install wget -y
+-> wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+-> yum install epel-release-latest-7.noarch.rpm -y
+-> sudo yum update -y
+-> sudo yum install git python python-devel python-pip openssl ansible -y
+-> ansible --version
+
+*  once installing ansible software ansible folder got created
+   /etc/ansible/ansible.cfg
+*  inventory file information will be available inside of ansible.cfg in a commented position
+   # vi /etc/ansible/ansible.cfg
+   delete comment inventory=/etc/ansible/hosts
+   delete comment sudo_user=root
+*  inside of hosts file we create one group and enter private ip adresses of the hosts
+   # vi  /etc/ansible/hosts
+   example: [webservers]
+           172.31.41.247
+           172.31.37.173
+
+then,{linux administration}
+   1.create one common user across all computers
+    #adduser
+   2.password
+   3.give sudo permissions to user
+    #visudo
+   4.establish ssh connection
+    #vi /etc/ssh/sshd_config
+ 
+    #service sshd restart
+
+   5.this step perform in ansible user
+    #ssh-keygen   (generating public and private rsa key pair)
+
+    #ssh-copy-id ansible@172.31.41.247  
+  
+

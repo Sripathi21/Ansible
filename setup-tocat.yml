@@ -1,0 +1,40 @@
+--- # install java, download&install tocat
+- hosts: all
+  user: ansible
+  become: yes
+  connection: ssh
+  taskas:
+     - name: install java in Redhat
+       yum:
+             name: java
+             state: present
+       when: ansible_os_family == "RedHat"
+
+     - name: install java in Debian
+       apt:
+             name: default-jdk
+             state: present
+       when: ansible_os_family == "Debian"
+
+     - name: tomcat download
+       get_url:
+             url: https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.22/bin/apache-tomcat-10.0.22.tar.gz
+             dest: /opt
+
+     - name: extract apache-tomcat-10.0.22.tar.gz
+       unarchive:
+             src: /opt/apache-tomcat-10.0.22.tar.gz
+             dest: /opt
+             remote_src: yes
+
+     - name: give executable permissions
+       file:
+             path: /opt/apache-tomcat-10.0.22/bin/startup.sh
+             mode: 0777
+
+     - name: start tomcat service
+       shell: nohup ./startup.sh
+       args:
+
+             chdir: /opt/apache-tomcat-10.0.22/bin
+

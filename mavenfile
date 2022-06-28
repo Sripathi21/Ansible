@@ -1,0 +1,65 @@
+/root    sudo su -
+   install git
+   yum install git -y
+
+   install java
+   yum install java-1.8* -y
+   
+   find java path
+   find /usr/lib/jvm/java-1.8* |  head -n 3
+
+   env variable
+   vi .bash_profile
+   restart
+   
+   check..
+   echo $JAVA_HOME
+
+ cd /opt/
+   download apache maven
+   wget https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz
+   
+   extract
+   tar -xvzf apache-maven-3.8.6-bin.tar.gz
+   
+   rename
+   mv apache-maven-3.8.6 maven
+  
+   env variable
+   M2_HOME=/opt/maven
+   M2=/opt/maven/bin
+   restart
+   
+   check..
+   echo $M2_HOME
+   echo $M2
+
+ cd maven/
+   mvn archetype:generate
+   Automatically it will download somany templates but, i want maven-archetype-webapp template only
+   
+   mvn archetype:generate | grep maven-archetype-webapp  (remember template num)
+
+   mvn archetype:generate
+   give template number
+     
+   yum install tree -y
+   tree
+   
+   chek once&see tree details (src&pom.xml)
+     
+   cat webapp-project/pom.xml
+  
+   verify (index.jsp)
+   cat webapp-project/src/main/webapp/index.jsp
+
+then,
+change some code in index.jsp
+git add
+git commit
+create new repo in github
+git push -u origin master
+
+then,
+integrate with jenkins 
+create new job with maven
